@@ -10,6 +10,9 @@
  
  On this challenge, we were given a tests and was tasked to make sure all tests pass and converting the starter code to a working code that uses Node.js command-line application.
  
+ I run the application and was able to generate an HTML file under the name "team.html" under the output folder.
+ A screenshot of the html can be seen on the Mock up section.
+ 
 ## Table of Contents
 
 * [Installation](#installation)
