@@ -14,44 +14,115 @@ const render = require("./starter/src/page-template");
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
 //initial code provided by Dan(instructor) during office hours
-inquirer.prompt([{
-    //manager questions
-}]).then(response => {
+inquirer.prompt([
+    //MANAGER questions
+    {
+        type: 'input',
+        name: 'name',
+        message: 'What is your Team Manager\'s name?',
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is your employee ID?',
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email address?',
+    },
+    {
+        type: 'input',
+        name: 'officeNumber',
+        message: 'What is your office number?',
+    },
+]).then(response => {
     // populate manager info
-    // promptForNexEmployee ()
+    console.log(response);
+    promptForNextEmployee();
 });
 
+//inquirer function that promts to select the type of employee
 const promptForNextEmployee = () => {
     inquirer.prompt([{
-        // choice of 3
+        type: 'list',
+        message: 'What type of employee do you want to add?',
+        name: 'addEmployee',
+        choices: ['Engineer', 'Intern', 'No more employees to add'],
     }]).then(response => {
         // if engineer
-        //    promptForEngineer
-        // else if intern
-        //    promptForIntern
-        // else
-        //    use the functionality from page-template to generate the team
+        if (response.addEmployee === "Engineer") {
+            promptForEngineer();
+        } else if (response.addEmployee=== "Intern") {// else if intern
+            promptForIntern();
+        } else {
+            //    use the functionality from page-template to generate the team
+            buildPage();
+        };
     })
 };
 
 const promptForEngineer = () => {
-    inquirer.prompt([{
-        //engineer questions
-    }]).then(response => {
+    inquirer.prompt([
+        //ENGINEER questions
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your Engineer\'s name?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your employee ID?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address?',
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is your github username?',
+        },
+    ]).then(response => {
         // add new engineer to employees array
-        // promptForNextEmployee
+        console.log("---Engineer's details---")
+        console.log(response);
+        promptForNextEmployee();
     })
 };
 
 const promptForIntern = () => {
-    inquirer.prompt([{
-        //intern questions
-    }]).then(response => {
-        // add new intern to employees array
-        // promptForNextEmployee
-    })
+    //intern questions
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your Intern\'s name?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your employee ID?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address?',
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What is the school that you attended?',
+        }]).then(response => {
+            // add new intern to employees array
+            console.log("---Intern's details---")
+            console.log(response);
+            promptForNextEmployee();
+        })
 };
 
 const buildPage = () => {
-// render(myArrayOfTeamMembers)
+    console.log("build page")
 };
