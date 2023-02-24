@@ -132,6 +132,6 @@ const buildPage = () => {
 
     fs.writeFile(outputPath, teamDetails, "utf-8", (err) => {
         if(err) throw err;
-        console.log(`Success! See Team Profile Page at ${outputPath}`)
+        console.log(`Success! See Team Profile Page at output folder under team.html`)
     })
 };
