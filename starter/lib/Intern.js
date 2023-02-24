@@ -9,15 +9,15 @@ class Intern extends Employee {
         super(name, id, email);
         this.school = school;
         
-    }
+    };
 
     getSchool() {
-
+        return this.school;
     };
 
     getRole() {
-        return Intern;
-    }
-}
+        return "Intern";
+    };
+};
 
 module.exports = Intern;
