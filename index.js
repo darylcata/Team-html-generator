@@ -13,6 +13,8 @@ const render = require("./starter/src/page-template");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+const teamArray = [];
+
 //initial code provided by Dan(instructor) during office hours
 inquirer.prompt([
     //MANAGER questions
@@ -37,8 +39,9 @@ inquirer.prompt([
         message: 'What is your office number?',
     },
 ]).then(response => {
-    // populate manager info
-    console.log(response);
+    // generate Manager's details and push the manager's details to teamArray
+    const manager = new Manager(response.name, response.id, response.email, response.officeNumber);
+    teamArray.push(manager);
     promptForNextEmployee();
 });
 
@@ -73,12 +76,12 @@ const promptForEngineer = () => {
         {
             type: 'input',
             name: 'id',
-            message: 'What is your employee ID?',
+            message: 'What is your engineer\'s employee ID?',
         },
         {
             type: 'input',
             name: 'email',
-            message: 'What is your email address?',
+            message: 'What is your engineer\'s email address?',
         },
         {
             type: 'input',
@@ -86,11 +89,11 @@ const promptForEngineer = () => {
             message: 'What is your github username?',
         },
     ]).then(response => {
-        // add new engineer to employees array
-        console.log("---Engineer's details---")
-        console.log(response);
+        // add new engineer to teamArray
+        const engineer = new Engineer(response.name, response.id, response.email, response.github);
+        teamArray.push(engineer);
         promptForNextEmployee();
-    })
+    });
 };
 
 const promptForIntern = () => {
@@ -104,25 +107,31 @@ const promptForIntern = () => {
         {
             type: 'input',
             name: 'id',
-            message: 'What is your employee ID?',
+            message: 'What is your Intern\'s employee ID?',
         },
         {
             type: 'input',
             name: 'email',
-            message: 'What is your email address?',
+            message: 'What is your Intern\'s email address?',
         },
         {
             type: 'input',
             name: 'school',
             message: 'What is the school that you attended?',
         }]).then(response => {
-            // add new intern to employees array
-            console.log("---Intern's details---")
-            console.log(response);
+            // add new intern to teamArray
+            const intern = new Intern(response.name, response.id, response.email, response.school);
+            teamArray.push(intern);
             promptForNextEmployee();
         })
 };
 
 const buildPage = () => {
-    console.log("build page")
+    // console.log(teamArray)
+    const teamDetails = render(teamArray);
+
+    fs.writeFile(outputPath, teamDetails, "utf-8", (err) => {
+        if(err) throw err;
+        console.log(`Success! See Team Profile Page at ${outputPath}`)
+    })
 };
